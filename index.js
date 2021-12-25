@@ -10,8 +10,34 @@ const swaggerDocument = YAML.load('./swagger.yaml');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+const courses = [
+    {
+        id: 1,
+        name: 'Learn ReactJS',
+        price: 299
+    },
+    {
+        id: 2,
+        name: 'Learn NodeJS',
+        price: 199
+    },
+    {
+        id: 3,
+        name: 'Learn Angular JS',
+        price: 2099
+    },
+]
+
 app.get('/',(req,res) => {
     res.status(200).json({homepage: 'index.js'});
+});
+
+app.get('/api/v1/lco',(req,res) => {
+    res.status(200).send("hello from lco docs");
+});
+
+app.get('/api/v1/lcoobject',(req,res) => {
+    res.status(200).json({id: 35,name: "Django",price: 2699});
 });
 
 app.listen(PORT,() => {

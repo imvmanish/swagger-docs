@@ -7,8 +7,86 @@ info:
     email: manish@gmail.com
     url: "imvmanish.com"
 
+# servers:
+#   - url: "https://localhost:3000/api/v1"
+#     description: for local host - secure
+#   - url: "http://localhost:3000/api/v1"
+#     description: for local host
+
 servers:
-  - url: "https://localhost:3000/api/v1"
-    description: for local host - secure
-  - url: "http://localhost:3000/api/v1"
-    description: for local host
+  - url: "{protocol}://localhost:3000/api/{version}"
+    description: for local host 
+    variables:
+      version:
+        enum: 
+          - v1
+          - v2
+        default: v1
+      protocol:
+        enum:
+          - https
+          - http
+        default: http
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: Token
+
+
+# paths:
+#   /lco:
+#     get:
+#     post:
+#   /api:
+#     put:
+#     get:
+
+paths:
+  /lco:
+    get:
+      tags:
+      - String
+      summary: returns a hello world message
+      responses:
+        '200':  
+          description: Successful OK.
+          content:
+            application/json:
+              schema: 
+                type: string
+  /lcoobject:
+    get:
+      tags:
+      - Object
+      summary: returns an object
+      responses:
+        '200':  
+          description: Successful OK.
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+                  price:
+                    type: number             
+        '400':  
+          description: Bad Request
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string             
+        '500':  
+          description: Internal Server Error
