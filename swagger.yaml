@@ -241,3 +241,40 @@ paths:
                     type: string             
         '500':  
           description: Internal Server Error
+  /upload:
+    post:
+      tags:
+      - Images
+      summary: uploading course image
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema: 
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':  
+          description: Successful OK.
+          content:
+            application/json:
+              schema: 
+                type: string           
+        '400':  
+          description: Bad Request
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string             
+        '500':  
+          description: Internal Server Error
