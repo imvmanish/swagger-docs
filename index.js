@@ -9,6 +9,7 @@ const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(express.json());
 
 const courses = [
     {
@@ -47,6 +48,19 @@ app.get('/api/v1/lcoarray',(req,res) => {
 app.get('/api/v1/course/:id',(req,res) => {
     const myCourse = courses.find(course => Number(course.id) === Number(req.params.id));
     res.status(200).json({myCourse});
+});
+
+app.post('/api/v1/addCourse',(req,res) => {
+    const course = req.body;
+    console.log(course);
+    courses.push(course);
+    res.send(true);
+});
+
+app.get('/api/v1/search',(req,res) => {
+    const location = req.query.location;
+    const device = req.query.device;
+    res.status(200).json({location , device});
 });
 
 app.listen(PORT,() => {

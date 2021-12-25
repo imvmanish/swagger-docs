@@ -159,3 +159,85 @@ paths:
                     type: string             
         '500':  
           description: Internal Server Error
+
+  /addCourse:
+    post:
+      tags:
+      - Boolean
+      summary: adds a course
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                id:
+                  type: number
+                name:
+                  type: string
+                price:
+                  type: number
+      responses:
+        '200':  
+          description: Successful OK.
+          content:
+            application/json:
+              schema: 
+                type: boolean            
+        '400':  
+          description: Bad Request
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string             
+        '500':  
+          description: Internal Server Error
+  /search:
+    get:
+      tags:
+      - Object
+      summary: search something
+      parameters:
+        - name: location
+          in: query
+          schema:
+            type: string
+            enum: [bangalore,delhi,noida]
+          required: true
+        - name: device
+          in: query
+          schema:
+            type: string
+            enum: [web,mobile]
+          required: true
+      responses:
+        '200':  
+          description: Successful OK.
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  location:
+                    type: string
+                  device:
+                    type: string            
+        '400':  
+          description: Bad Request
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string             
+        '500':  
+          description: Internal Server Error
