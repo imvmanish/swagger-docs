@@ -40,6 +40,15 @@ app.get('/api/v1/lcoobject',(req,res) => {
     res.status(200).json({id: 35,name: "Django",price: 2699});
 });
 
+app.get('/api/v1/lcoarray',(req,res) => {
+    res.status(200).json({courses});
+});
+
+app.get('/api/v1/course/:id',(req,res) => {
+    const myCourse = courses.find(course => Number(course.id) === Number(req.params.id));
+    res.status(200).json({myCourse});
+});
+
 app.listen(PORT,() => {
     console.log(`Server running on port ${PORT}`);
 });

@@ -90,3 +90,72 @@ paths:
                     type: string             
         '500':  
           description: Internal Server Error
+
+  /lcoarray:
+    get:
+      tags:
+      - Array
+      summary: returns an array of courses
+      responses:
+        '200':  
+          description: Successful OK.
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                    price:
+                      type: number             
+        '400':  
+          description: Bad Request
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string             
+        '500':  
+          description: Internal Server Error
+  /course/{id}:
+    get:
+      tags:
+      - Object
+      summary: returns a course of given id
+      parameters:
+        - in: path
+          name: id
+          default: 1
+          schema:
+            type: integer
+      responses:
+        '200':  
+          description: Successful OK.
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+                  price:
+                    type: number             
+        '400':  
+          description: Bad Request
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string             
+        '500':  
+          description: Internal Server Error
